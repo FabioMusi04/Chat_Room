@@ -64,13 +64,14 @@
 
 [![Product Name Screen Shot][product-screenshot]](ilmusa.me:3001)
 
-Description coming soon..
+This project is a real-time chat room built with Node.js and socket.io. It allows multiple users to join a chat and send messages to each other in real-time.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
+
 
 [![Javascript][Javascript.js]][Javascript-url]
 [![NodeJS][Node.JS]][NodeJS-url]
@@ -112,7 +113,7 @@ Install Node.js
 ## Usage
 
 A node.js project with socket.io usage would involve using the socket.io library to add real-time, bi-directional communication capabilities to a node.js application. This could be useful for a variety of purposes, such as enabling live chat functionality like this project.
-
+To use the chat room, open a web browser and go to http://localhost:3001. You will be able to see the chat room interface and can join the chat by entering a username. Once you have joined the chat, you will be able to send messages to other users who are currently online.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
