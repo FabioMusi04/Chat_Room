@@ -21,7 +21,7 @@
     <a href="https://github.com/FabioMusi04/Chat_Room"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="ilmusa.me:3001">View Demo</a>
+    <a href="https://ilmusa.me:3001">View Demo</a>
     ·
     <a href="https://github.com/FabioMusi04/Chat_Room/issues">Report Bug</a>
     ·
