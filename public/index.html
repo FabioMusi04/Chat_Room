@@ -102,6 +102,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      /**
+       * Output a list of users to the specified element.
+       *
+       * @param {Object[]} users - The list of users to be output
+       * @param {string} users[].username - The username of a user
+       */
       function outputUsers(users) {
         const userList = document.getElementById("users");
         userList.innerHTML = "";
@@ -113,6 +119,10 @@
         });
       }
 
+
+      /**
+       * Prompt the user to enter a username, until a non-empty username is provided.
+       */
       function CheckUsername() {
         username = prompt("Please enter a username: ", "");
         if (
@@ -130,20 +140,38 @@
         }
       }
 
+
       const form = document.querySelector("form");
       const input = document.querySelector(".input");
       const messages = document.querySelector(".messages");
       var username = "";
+
+
+      /**
+       * Prompt the user to enter a username, until a non-empty username is provided.
+       */
       CheckUsername();
+
+      // Continue only if the user provided a non-empty username
       if (username) {
         const socket = io();
 
+        /**
+         * Handle form submission events.
+         * Send the message and add it to the list of messages.
+         *
+         * @param {Event} event - The submit event
+         */
         form.addEventListener(
           "submit",
           function (event) {
-            //fixare controllo
+            // Prevent the default form submission behavior
             event.preventDefault();
+
+            // Send the message to the server
             socket.emit("msg", { message: input.value, user: username });
+
+            // If the message is not empty, add it to the list of messages
             if (
               input.value != null &&
               input.value != "" &&
@@ -158,33 +186,78 @@
                 true
               );
             }
+
+            // Clear the input field
             input.value = "";
+
+            // Return false to prevent further form submission
             return false;
           },
           false
         );
 
+
+        /**
+         * Handle "chat_message" events.
+         * Add the message to the list of messages.
+         *
+         * @param {Object} data - Event data
+         * @param {string} data.message - The message to be added
+         * @param {string} data.user - The user who sent the message
+         */
         socket.on("chat_message", function (data) {
           addMessage(
             new Date().toLocaleString() + " " + data.user + ": " + data.message
           );
         });
 
+
+        /**
+         * Handle "user_join" events.
+         * Add a notification message to the list of messages.
+         *
+         * @param {string} data - The username of the user who joined the chat
+         */
         socket.on("user_join", function (data) {
           addMessage(data + " just joined the chat!");
         });
 
+
+        /**
+         * Handle "user_leave" events.
+         * Add a notification message to the list of messages.
+         *
+         * @param {string} data - The username of the user who left the chat
+         */
         socket.on("user_leave", function (data) {
           addMessage(data + " has left the chat.");
         });
 
+
+        /**
+         * Handle "roomUsers" events.
+         * Update the list of users.
+         *
+         * @param {Object[]} users - The list of users to be output
+         * @param {string} users[].username - The username of a user
+         */
         socket.on("roomUsers", (users) => {
           outputUsers(users);
         });
 
+        // Add a message to the list of messages
         addMessage("You have joined the chat as '" + username + "'.");
+
+        // Send a "user_join" event to the server
         socket.emit("user_join", username);
 
+        
+        /**
+         * Add a message to the list of messages.
+         *
+         * @param {string} message - The message to be added
+         * @param {boolean} [mine=false] - Whether the message was sent by the current user
+         */
         function addMessage(message, mine = false) {
           if (message != null && message != "" && message.trim().length != 0) {
             const li = document.createElement("li");
@@ -198,6 +271,7 @@
         }
       }
 
+      //SCRIPT FOR STYLING FLOWBITE
       var themeToggleDarkIcon = document.getElementById(
         "theme-toggle-dark-icon"
       );
