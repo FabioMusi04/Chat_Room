@@ -162,7 +162,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTACT -->
 ## Contact
 
@@ -184,7 +183,29 @@ Project Link: [https://github.com/FabioMusi04/Chat_Room](https://github.com/Fabi
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Code Explanation
 
+```
+index.js:
+```
+```
+This code is a simple chat server that uses the socket.io library to communicate with connected clients. It sets up an HTTP server using the express library, which listens for incoming requests on port 3001. When a user navigates to the server's homepage, the server sends the file located at ./public/index.html.
+
+The server uses the socket.io library to listen for various events. When a user connects to the server, the server adds the user's information to a list of connected users and emits an event to all connected clients to update the list of connected users. When a user sends a message, the server broadcasts the message to all other connected clients. When a user disconnects, the server broadcasts that the user has left and updates the list of connected users.
+```
+
+<hr>
+
+```
+index.html
+```
+```
+This contains a script section for a simple client-side JavaScript script for a chat application. When the script runs, it prompts the user to enter a username, which it then uses to connect to a chat server using the socket.io library.
+
+When the user submits a message, the script sends the message to the chat server using the socket.io library, and also appends the message to the list of messages displayed on the page. When the server broadcasts a message, the script appends the message to the list of messages displayed on the page. When the server broadcasts that a user has joined or left the chat, the script appends a message to the list of messages displayed on the page.
+
+The script also updates a list of connected users on the page by calling the outputUsers function whenever the server emits an update to the list of connected users.
+```
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/FabioMusi04/Chat_Room.svg?style=for-the-badge
