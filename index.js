@@ -4,11 +4,11 @@
 const express = require("express");
 const app = express();
 const port = 3001;
-const bodyParser = require("body-parser");
 const path = require("path");
-const http = require("http");
-const server = http.Server(app);
-const io = require("socket.io")(server);
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 /**
  * Serve static files from the 'public' directory.
